@@ -60,13 +60,22 @@ class Downloader:
             with yt_dlp.YoutubeDL(params) as ydl:
                 ydl.download([request.url])
 
-            for file in os.listdir(temp_dir):
-                logger.info("Uploading file", extra={"file": file})
+            # Recursively upload all files in the temporary directory
+            for root, _, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(root, file)
 
-                _ = self.store.put(
-                    posixpath.join(prefix, file),
-                    Path(os.path.join(temp_dir, file)),
-                )
+                    # Calculate relative path from temp_dir
+                    relative_path = os.path.relpath(file_path, temp_dir)
+
+                    # Convert to posix path for object store key
+                    object_key = posixpath.join(
+                        prefix, relative_path.replace(os.sep, "/")
+                    )
+
+                    logger.info("Uploading file", extra={"file": relative_path})
+
+                    _ = self.store.put(object_key, Path(file_path))
 
 
 def create_service(
