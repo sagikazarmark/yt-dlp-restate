@@ -1,0 +1,25 @@
+[project]
+name = "yt-dlp-restate"
+version = "0.1.0"
+description = "Durable workflow component for downloading videos from YouTube"
+readme = "README.md"
+authors = [
+    { name = "Mark Sagi-Kazar", email = "mark.sagikazar@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "obstore>=0.8.2",
+    "pydantic>=2.12.4",
+    "restate-sdk[serde]>=0.11.0",
+    "yt-dlp>=2025.10.22",
+]
+
+[project.optional-dependencies]
+app = [
+    "granian[pname,reload]>=2.5.7",
+    "pydantic-settings>=2.12.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.23,<0.9.0"]
+build-backend = "uv_build"

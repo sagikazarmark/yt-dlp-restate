@@ -1,0 +1,10 @@
+/.devenv/
+/.direnv/
+/var/
+*.nix
+.dockerignore
+.envrc
+devenv.*
+docker-compose.yaml
+Dockerfile
+justfile
