@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-
+from datetime import timedelta
 import obstore
 import restate
 from .downloader import Downloader, DownloadRequest, DownloaderOptions
@@ -32,7 +32,11 @@ def create_service(
 
     downloader = Downloader(store, base_params, options)
 
-    @service.handler()  # pyright: ignore [reportUnknownMemberType, reportUntypedFunctionDecorator]
+    @service.handler(  # pyright: ignore [reportUnknownMemberType, reportUntypedFunctionDecorator]
+        # TODO: make this configurable?
+        inactivity_timeout=timedelta(minutes=30),
+        abort_timeout=timedelta(minutes=30),
+    )
     async def download(  # pyright: ignore [reportUnusedFunction]
         ctx: restate.Context,
         request: DownloadRequest,
