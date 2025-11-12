@@ -5,7 +5,7 @@ import restate
 from pydantic import Field
 from pydantic_settings import BaseSettings
 
-from yt_dlp_restate import create_service
+from .restate import create_service
 
 
 class Settings(BaseSettings):
