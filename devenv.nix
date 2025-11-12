@@ -3,6 +3,8 @@
 {
   packages = with pkgs; [
     just
+    semver-tool
+
     ffmpeg
   ];
 
