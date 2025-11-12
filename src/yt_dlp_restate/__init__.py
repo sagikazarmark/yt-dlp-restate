@@ -1,4 +1,10 @@
-from .downloader import Downloader, DownloadRequest
+from .downloader import Downloader, DownloadRequest, DownloaderOptions, Filter
 from .restate import create_service
 
-__all__ = ["Downloader", "DownloadRequest", "create_service"]
+__all__ = [
+    "Downloader",
+    "DownloadRequest",
+    "DownloaderOptions",
+    "Filter",
+    "create_service",
+]
